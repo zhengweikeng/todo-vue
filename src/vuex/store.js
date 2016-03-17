@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import todos from './modules/todos'
+import middlewares from './middleware'
 
 Vue.use(Vuex)
 Vue.config.debug = true
@@ -11,5 +12,6 @@ export default new Vuex.Store({
   modules: {
     todos
   },
+  middlewares,
   strict: debug
 })

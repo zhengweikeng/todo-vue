@@ -1,17 +1,30 @@
 import {todo} from '../../config/common'
 
-const STORAGE_KEY = 'todos'
 const state = {
-  items: JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+  items: JSON.parse(localStorage.getItem(todo.STORAGE_KEY) || '[]')
 }
 
 const mutations = {
   [todo.ADD_TODO] (state, value) {
-    state.items.push(value)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items))
+    state.items.push({
+      text: value,
+      done: false
+    })
+  },
+  [todo.DELETE_TODO] (state, value) {
+    // $remove() is just syntax sugar for splice()
+    state.items.$remove(value)
+  },
+  [todo.EDIT_TODO] (state, todo, value) {
+    todo.text = value
+  },
+  [todo.UPDATE_TODO_STATE] (state, todo) {
+    todo.done = !todo.done
+  },
+  [todo.CLEAR_ALL_TODO] (state) {
+    state.items = []
   }
 }
-
 export default {
   state,
   mutations
