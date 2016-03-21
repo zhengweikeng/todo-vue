@@ -24,11 +24,6 @@ import {deleteTodo, editTodo, updateTodoState} from '../vuex/actions/todo.action
 
 export default {
   props: ['todos'],
-  data () {
-    return {
-      editing: false
-    }
-  },
   vuex: {
     actions: {
       deleteTodo,
